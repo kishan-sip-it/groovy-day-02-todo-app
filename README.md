@@ -3,11 +3,39 @@
 Day 2 of the AI-First Engineer journey.
 
 ## Goal
-Build a TODO application using React + Node from prompts only.
+Build a runnable TODO application using React + Node from prompts only.
+
+## Project Structure
+
+```text
+backend/
+  package.json
+  server.js
+  store.js
+  todos.js
+
+frontend/
+  package.json
+  index.html
+  vite.config.js
+  src/
+    api.js
+    App.jsx
+    main.jsx
+    styles.css
+
+package.json
+README.md
+PROMPTS.md
+.gitignore
+```
+
+The backend uses simple in-memory storage as required for this exercise. No database is used.
 
 ## AI Prompt Log
 
-### Prompt 1 — Initial implementation
+### Prompt 1 — Initial implementation (Cline)
+
 ```text
 You are my AI coding assistant for Day 2 of an AI-First Engineer journey.
 
@@ -31,17 +59,71 @@ Requirements:
 Do not just describe the code. Actually create the files and implement the application.
 ```
 
-### Prompt 2 — Verification and correction
-_To be added after Prompt 1 is executed._
+### Prompt 2 — Verification / correction
+
+```text
+Inspect the current Day 2 TODO application as a reviewer.
+
+Verify that:
+- React and Node/Express are clearly separated.
+- The REST API supports create, read, update/toggle, and delete.
+- The React UI can create, display, toggle, and delete TODOs.
+- Loading, empty, and error states exist.
+- The Vite development proxy routes /api requests to the Node backend.
+- The project scripts are clear enough for a fresh clone to run.
+
+Identify and correct any implementation issue you find without adding a database or unnecessary dependencies.
+Then report the exact changes and the verification commands that should be run locally.
+```
 
 ### Prompt 3 — Final review / polish
-_To be added after Prompt 2 is executed._
+
+```text
+Perform a final engineering review of the Day 2 TODO application.
+
+Check for:
+- obvious runtime or build issues
+- broken imports or paths
+- inconsistent API behavior
+- accessibility issues in the UI
+- unnecessary complexity
+- unclear README instructions
+
+Make only necessary corrections. Keep the implementation simple and aligned with the Day 2 React + Node requirement.
+Return a concise final checklist of what is ready and what must still be verified locally.
+```
 
 ## Running the Project
 
-_To be completed after implementation and verification._
+From the root of this repository:
+
+```bash
+npm install
+npm --prefix backend install
+npm --prefix frontend install
+npm run dev
+```
+
+The application should then be available at:
+
+- Frontend: `http://localhost:5173`
+- Backend health check: `http://localhost:4000/api/health`
+
+The Vite development server proxies `/api` requests to the Node backend.
+
+## Required Day 2 Verification
+
+Test the full TODO flow in the browser:
+
+1. Load the application.
+2. Confirm the starter TODOs appear.
+3. Add a new TODO.
+4. Mark a TODO complete and incomplete.
+5. Delete a TODO.
+6. Refresh the page and confirm the app still starts correctly.
+7. Confirm the backend health endpoint returns an OK response.
 
 ## AI Review Notes
 
-- What AI did well: _To be added after senior review._
-- What AI failed at: _To be added after senior review._
+- What AI did well: _To be filled after senior review._
+- What AI failed at: _To be filled after senior review._
