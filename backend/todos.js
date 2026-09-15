@@ -8,40 +8,61 @@ router.get("/", (_req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const text = typeof req.body?.text === "string" ? req.body.text.trim() : "";
+  const title = typeof req.body?.title === "string"
+    ? req.body.title.trim()
+    : typeof req.body?.text === "string"
+      ? req.body.text.trim()
+      : "";
 
-  if (!text) {
-    return res.status(400).json({ error: "Todo text is required." });
+  if (!title) {
+    return res.status(400).json({ error: "Task title is required." });
   }
 
-  return res.status(201).json(createTodo(text));
+  return res.status(201).json(createTodo({ ...req.body, title }));
 });
 
 router.patch("/:id", (req, res) => {
   const id = Number(req.params.id);
 
   if (!Number.isInteger(id)) {
-    return res.status(400).json({ error: "Todo id must be an integer." });
+    return res.status(400).json({ error: "Task id must be an integer." });
   }
 
-  const changes = {};
+  const hasSupportedField = [
+    "title",
+    "text",
+    "completed",
+    "status",
+    "priority",
+    "description",
+    "assignee",
+    "dueDate"
+  ].some((key) => Object.prototype.hasOwnProperty.call(req.body || {}, key));
 
-  if (typeof req.body?.text === "string") {
-    const text = req.body.text.trim();
-    if (!text) return res.status(400).json({ error: "Todo text cannot be empty." });
-    changes.text = text;
+  if (!hasSupportedField) {
+    return res.status(400).json({ error: "Provide at least one task field to update." });
   }
 
-  if (typeof req.body?.completed === "boolean") {
-    changes.completed = req.body.completed;
+  const changes = { ...req.body };
+
+  if (changes.title !== undefined && typeof changes.title !== "string") {
+    return res.status(400).json({ error: "Task title must be a string." });
   }
 
-  if (Object.keys(changes).length === 0) {
-    return res.status(400).json({ error: "Provide text or completed to update." });
+  if (changes.text !== undefined && typeof changes.text !== "string") {
+    return res.status(400).json({ error: "Task text must be a string." });
+  }
+
+  if (changes.status !== undefined && !["Pending", "InProgress", "Completed"].includes(changes.status)) {
+    return res.status(400).json({ error: "Invalid task status." });
+  }
+
+  if (changes.priority !== undefined && !["High", "Medium", "Low"].includes(changes.priority)) {
+    return res.status(400).json({ error: "Invalid task priority." });
   }
 
   const todo = updateTodo(id, changes);
-  if (!todo) return res.status(404).json({ error: "Todo not found." });
+  if (!todo) return res.status(404).json({ error: "Task not found." });
 
   return res.json(todo);
 });
@@ -50,11 +71,11 @@ router.delete("/:id", (req, res) => {
   const id = Number(req.params.id);
 
   if (!Number.isInteger(id)) {
-    return res.status(400).json({ error: "Todo id must be an integer." });
+    return res.status(400).json({ error: "Task id must be an integer." });
   }
 
   if (!deleteTodo(id)) {
-    return res.status(404).json({ error: "Todo not found." });
+    return res.status(404).json({ error: "Task not found." });
   }
 
   return res.status(204).send();
