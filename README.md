@@ -1,5 +1,7 @@
 # Groovy Day 02 — TODO App
 
+> **READ THIS FIRST:** This repository is the Day 2 runnable application. Use this README for install, run, verification, and feature navigation.
+
 Day 2 of the AI-First Engineer journey.
 
 ## Goal
@@ -8,6 +10,12 @@ Build a runnable TODO application using React + Node from prompts only.
 ## Day 2 UI
 
 The UI is intentionally modeled after the visual language of the existing `taskflow-dotnet` project: dark TaskFlowPro-style workspace, top navigation, dashboard, Kanban board, task cards, priorities, task modal, profile view, and drag-and-drop status movement — rebuilt for the required React + Node.js stack.
+
+## Extra engineering feature — Keyboard-first command palette
+
+Press **Ctrl/⌘ + K** to open the Quick Actions palette. It provides keyboard-first navigation for Dashboard, Board, Profile, and New Task. You can also use `D`, `B`, `N`, and `P` when you are not typing in a form field.
+
+This makes the app faster to operate and demonstrates an interaction pattern useful in real productivity software.
 
 ## Project Structure
 
@@ -25,6 +33,7 @@ frontend/
   src/
     api.js
     App.jsx
+    commandPalette.js
     main.jsx
     styles.css
 
@@ -149,9 +158,11 @@ The Vite development server proxies `/api` requests to the Node backend.
 7. Change priority, assignee, description, and due date.
 8. Search and filter tasks.
 9. Delete a task.
-10. Confirm the backend health endpoint returns an OK response.
-11. Refresh the application and confirm it starts correctly.
-12. Push the final verified state to GitHub.
+10. Press **Ctrl/⌘ + K** and verify the command palette opens.
+11. Verify `D`, `B`, `N`, and `P` work outside input fields.
+12. Confirm the backend health endpoint returns an OK response.
+13. Refresh the application and confirm it starts correctly.
+14. Push the final verified state to GitHub.
 
 ## AI Review Notes
 
