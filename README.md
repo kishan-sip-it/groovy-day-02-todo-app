@@ -5,6 +5,10 @@ Day 2 of the AI-First Engineer journey.
 ## Goal
 Build a runnable TODO application using React + Node from prompts only.
 
+## Day 2 UI
+
+The UI is intentionally modeled after the visual language of the existing `taskflow-dotnet` project: dark TaskFlowPro-style workspace, top navigation, dashboard, Kanban board, task cards, priorities, task modal, profile view, and drag-and-drop status movement — rebuilt for the required React + Node.js stack.
+
 ## Project Structure
 
 ```text
@@ -30,7 +34,7 @@ PROMPTS.md
 .gitignore
 ```
 
-The backend uses simple in-memory storage as required for this exercise. No database is used.
+The backend uses simple in-memory storage. No database is used.
 
 ## AI Prompt Log
 
@@ -93,6 +97,29 @@ Make only necessary corrections. Keep the implementation simple and aligned with
 Return a concise final checklist of what is ready and what must still be verified locally.
 ```
 
+### Prompt 4 — UI transformation and Kanban expansion
+
+```text
+Transform the Day 2 TODO app into a TaskFlowPro-style workspace while keeping the required React + Node.js stack.
+
+Use the existing taskflow-dotnet project as the visual reference, but rebuild the implementation for this repository.
+
+Add:
+- dark TaskFlowPro-style visual language
+- Dashboard view with task statistics and activity breakdown
+- Kanban Board view with To Do, In Progress, and Done columns
+- drag-and-drop movement between columns
+- task cards with priority, assignee, description, and due date
+- search and priority filtering
+- create/edit task modal
+- delete confirmation
+- Profile view
+- toast feedback
+- REST API support for the expanded task model
+
+Keep the backend in-memory and keep the application runnable with the existing React + Node architecture.
+```
+
 ## Running the Project
 
 From the root of this repository:
@@ -113,15 +140,18 @@ The Vite development server proxies `/api` requests to the Node backend.
 
 ## Required Day 2 Verification
 
-Test the full TODO flow in the browser:
-
-1. Load the application.
-2. Confirm the starter TODOs appear.
-3. Add a new TODO.
-4. Mark a TODO complete and incomplete.
-5. Delete a TODO.
-6. Refresh the page and confirm the app still starts correctly.
-7. Confirm the backend health endpoint returns an OK response.
+1. Load the dashboard.
+2. Open the Board.
+3. Confirm starter tasks appear in the correct columns.
+4. Create a task.
+5. Edit a task.
+6. Drag a task between To Do, In Progress, and Done.
+7. Change priority, assignee, description, and due date.
+8. Search and filter tasks.
+9. Delete a task.
+10. Confirm the backend health endpoint returns an OK response.
+11. Refresh the application and confirm it starts correctly.
+12. Push the final verified state to GitHub.
 
 ## AI Review Notes
 
