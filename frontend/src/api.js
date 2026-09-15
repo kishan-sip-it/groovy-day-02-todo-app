@@ -14,12 +14,12 @@ export async function fetchTodos() {
   return parseResponse(await fetch(BASE_URL));
 }
 
-export async function createTodo(text) {
+export async function createTodo(task) {
   return parseResponse(
     await fetch(BASE_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text })
+      body: JSON.stringify(task)
     })
   );
 }
